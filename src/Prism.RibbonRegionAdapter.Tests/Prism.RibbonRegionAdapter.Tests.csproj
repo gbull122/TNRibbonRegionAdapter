@@ -35,7 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>..\..\..\utillity\Source1\uTILLIty.Key\utillity.snk</AssemblyOriginatorKeyFile>
@@ -90,17 +90,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Prism.RibbonRegionAdapter\Prism.RibbonRegionAdapter.csproj">
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Prism.RibbonRegionAdapter\TNRibbonRegionAdapter.csproj">
       <Project>{44c9b173-e458-4172-b204-c56cc9a01b20}</Project>
-      <Name>Prism.RibbonRegionAdapter</Name>
+      <Name>TNRibbonRegionAdapter</Name>
     </ProjectReference>
     <ProjectReference Include="..\TestApplication\TestApplication.csproj">
       <Project>{b407c2b3-2700-438f-8700-b1ed6816da70}</Project>
       <Name>TestApplication</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

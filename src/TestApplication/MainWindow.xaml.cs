@@ -1,16 +1,14 @@
-﻿namespace TestApplication
+﻿using System.Windows;
+
+namespace TestApplication
 {
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
-	public partial class MainWindow
+	public partial class MainWindow:Window
 	{
-		public MainWindow() : this(null)
+		public MainWindow()
 		{
-		}
-		public MainWindow(MainWindowViewModel viewModel)
-		{
-			DataContext = viewModel;
 			InitializeComponent();
 		}
 	}

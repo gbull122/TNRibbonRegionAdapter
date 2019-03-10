@@ -1,8 +1,9 @@
-﻿using System.Windows.Input;
+﻿using Prism.Mvvm;
+using System.Windows.Input;
 
 namespace TestApplication
 {
-	public class MainWindowViewModel
+	public class MainWindowViewModel:BindableBase
 	{
 		public MainWindowViewModel(ShellHelloCommand cmd, 
 			LoadModule1RibbonCommand loadModule1RibbonCommand,

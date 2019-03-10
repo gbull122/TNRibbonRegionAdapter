@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Microsoft.Practices.Prism.Regions;
 using System;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using Prism.Regions;
 
-namespace Prism.RibbonRegionAdapter
+namespace TNRibbonRegionAdapter
 {
 	public class MergingItemsControlRegionAdapter : RegionAdapterBase<ItemsControl>
 	{

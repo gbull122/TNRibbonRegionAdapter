@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Windows;
 
-namespace Prism.RibbonRegionAdapter
+namespace TNRibbonRegionAdapter
 {
 	/// <summary>
 	/// Extensions of <see cref="UIElement"/> instances

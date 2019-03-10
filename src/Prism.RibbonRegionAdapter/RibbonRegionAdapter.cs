@@ -1,11 +1,11 @@
-﻿using Microsoft.Practices.Prism.Regions;
+﻿using Prism.Regions;
 using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Ribbon;
 
-namespace Prism.RibbonRegionAdapter
+namespace TNRibbonRegionAdapter
 {
 	public class RibbonRegionAdapter : MergingItemsControlRegionAdapter
 	{

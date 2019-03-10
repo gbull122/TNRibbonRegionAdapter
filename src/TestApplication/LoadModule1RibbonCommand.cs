@@ -1,7 +1,7 @@
-﻿using System;
+﻿using CommonServiceLocator;
+using Prism.Regions;
+using System;
 using System.Windows.Input;
-using Microsoft.Practices.Prism.Regions;
-using Microsoft.Practices.ServiceLocation;
 
 namespace TestApplication
 {
@@ -14,8 +14,8 @@ namespace TestApplication
 		public LoadModule1RibbonCommand(IRegionManager regionManager)
 		{
 			_regionManager = regionManager;
-			if (_regionManager.Regions.ContainsRegionWithName(ShellRegions.MainMenu))
-				_regionManager.Regions[ShellRegions.MainMenu].Views.CollectionChanged += (o, e) => RaiseCanExecuteChanged();
+			if (_regionManager.Regions.ContainsRegionWithName("MainMenu"))
+				_regionManager.Regions["MainMenu"].Views.CollectionChanged += (o, e) => RaiseCanExecuteChanged();
 			else
 				_regionManager.Regions.CollectionChanged += OnRegionsChanged;
 		}
@@ -44,18 +44,18 @@ namespace TestApplication
 
 		private void OnRegionsChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 		{
-			if (_regionManager.Regions.ContainsRegionWithName(ShellRegions.MainMenu))
+			if (_regionManager.Regions.ContainsRegionWithName("MainMenu"))
 			{
 				_regionManager.Regions.CollectionChanged -= OnRegionsChanged;
-				_regionManager.Regions[ShellRegions.MainMenu].Views.CollectionChanged += (o, e2) => RaiseCanExecuteChanged();
+				_regionManager.Regions["MainMenu"].Views.CollectionChanged += (o, e2) => RaiseCanExecuteChanged();
 				RaiseCanExecuteChanged();
 			}
 		}
 
 		private IRegion GetRegion()
 		{
-			if (_regionManager.Regions.ContainsRegionWithName(ShellRegions.MainMenu))
-				return _regionManager.Regions[ShellRegions.MainMenu];
+			if (_regionManager.Regions.ContainsRegionWithName("MainMenu"))
+				return _regionManager.Regions["MainMenu"];
 			return null;
 		}
 

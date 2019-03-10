@@ -1,9 +1,10 @@
-﻿using System.Windows.Input;
+﻿using Prism.Mvvm;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace TestApplication.Module1
 {
-	public class RibbonViewModel
+	public class RibbonViewModel:BindableBase
 	{
 		public RibbonViewModel(Module1HelloCommand cmd)
 		{

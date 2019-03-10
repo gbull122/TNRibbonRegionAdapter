@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prism.RibbonRegionAdapter", "Prism.RibbonRegionAdapter\Prism.RibbonRegionAdapter.csproj", "{44C9B173-E458-4172-B204-C56CC9A01B20}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNRibbonRegionAdapter", "Prism.RibbonRegionAdapter\TNRibbonRegionAdapter.csproj", "{44C9B173-E458-4172-B204-C56CC9A01B20}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prism.RibbonRegionAdapter.Tests", "Prism.RibbonRegionAdapter.Tests\Prism.RibbonRegionAdapter.Tests.csproj", "{87E3C6DE-08B6-4B20-A400-DD8D17494FB1}"
 EndProject

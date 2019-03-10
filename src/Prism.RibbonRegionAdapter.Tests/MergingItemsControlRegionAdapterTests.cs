@@ -1,9 +1,10 @@
 ﻿using System.Linq;
 using System.Windows;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestApplication;
 using TestApplication.Module1;
+using TNRibbonRegionAdapter;
 
 namespace Prism.RibbonRegionAdapter.Tests
 {

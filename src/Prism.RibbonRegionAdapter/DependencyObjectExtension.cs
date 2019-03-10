@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Media;
 
-namespace Prism.RibbonRegionAdapter
+namespace TNRibbonRegionAdapter
 {
 	/// <summary>
 	/// Extensions to <see cref="DependencyObject"/> instances

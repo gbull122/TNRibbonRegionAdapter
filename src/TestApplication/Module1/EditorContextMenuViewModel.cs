@@ -1,8 +1,9 @@
-﻿using System.Windows.Input;
+﻿using Prism.Mvvm;
+using System.Windows.Input;
 
 namespace TestApplication.Module1
 {
-	public class EditorContextMenuViewModel
+	public class EditorContextMenuViewModel:BindableBase
 	{
 		public EditorContextMenuViewModel(Module1HelloCommand cmd)
 		{

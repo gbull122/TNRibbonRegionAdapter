@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace Prism.RibbonRegionAdapter
+namespace TNRibbonRegionAdapter
 {
 	/// <summary>
 	/// Xaml shortcut Markup-Extension for the binding-expression 
