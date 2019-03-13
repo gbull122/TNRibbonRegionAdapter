@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNRibbonRegionAdapter", "Prism.RibbonRegionAdapter\TNRibbonRegionAdapter.csproj", "{44C9B173-E458-4172-B204-C56CC9A01B20}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TNRibbonRegionAdapter", "TNRibbonRegionAdapter\TNRibbonRegionAdapter.csproj", "{44C9B173-E458-4172-B204-C56CC9A01B20}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prism.RibbonRegionAdapter.Tests", "Prism.RibbonRegionAdapter.Tests\Prism.RibbonRegionAdapter.Tests.csproj", "{87E3C6DE-08B6-4B20-A400-DD8D17494FB1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApplication", "TestApplication\TestApplication.csproj", "{B407C2B3-2700-438F-8700-B1ED6816DA70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModuleA", "ModuleA\ModuleA.csproj", "{A027E56D-61A9-4ECC-9C51-D5E15FA107E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{B407C2B3-2700-438F-8700-B1ED6816DA70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B407C2B3-2700-438F-8700-B1ED6816DA70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B407C2B3-2700-438F-8700-B1ED6816DA70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A027E56D-61A9-4ECC-9C51-D5E15FA107E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A027E56D-61A9-4ECC-9C51-D5E15FA107E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A027E56D-61A9-4ECC-9C51-D5E15FA107E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A027E56D-61A9-4ECC-9C51-D5E15FA107E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

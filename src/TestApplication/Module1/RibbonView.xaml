@@ -1,0 +1,42 @@
+﻿<UserControl 
+    x:Class="TestApplication.Module1.RibbonView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:adapter="clr-namespace:TNRibbonRegionAdapter;assembly=TNRibbonRegionAdapter"
+    xmlns:loc="clr-namespace:TestApplication"
+    prism:ViewModelLocator.AutoWireViewModel="True">
+    
+    <Ribbon 
+        x:Name="MainMenu" 
+        x:FieldModifier="protected internal">
+
+        <RibbonTab
+            Header="Module1 Tab"
+            adapter:UIElementExtension.MergeKey="Module1 Tab"
+            adapter:UIElementExtension.MergeOrder="5">
+            <RibbonGroup
+                Header="A Group">
+
+            </RibbonGroup>
+        </RibbonTab>
+
+        <RibbonTab 
+            Header="General"
+            adapter:UIElementExtension.MergeKey="GeneralTab">
+            <RibbonGroup 
+                Header="Group 1">
+                <RibbonButton 
+                    Label="Button1 (Module1)" 
+                    Command="{Binding Module1Command}" 
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
+                <RibbonButton 
+                    Label="Button2 (Module1)" 
+                    Command="{Binding Module1Command}" 
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
+            </RibbonGroup>
+        </RibbonTab>
+
+       
+	</Ribbon>
+</UserControl>

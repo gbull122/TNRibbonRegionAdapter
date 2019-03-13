@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\TestApplication\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -86,7 +86,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Prism.RibbonRegionAdapter\TNRibbonRegionAdapter.csproj">
+    <ProjectReference Include="..\TNRibbonRegionAdapter\TNRibbonRegionAdapter.csproj">
       <Project>{44c9b173-e458-4172-b204-c56cc9a01b20}</Project>
       <Name>TNRibbonRegionAdapter</Name>
     </ProjectReference>

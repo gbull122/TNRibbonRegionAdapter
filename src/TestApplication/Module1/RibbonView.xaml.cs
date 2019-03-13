@@ -3,11 +3,11 @@
 namespace TestApplication.Module1
 {
 	/// <summary>
-	/// Interaction logic for EditorContextMenuView.xaml
+	/// Interaction logic for Ribbon.xaml
 	/// </summary>
-	public partial class EditorContextMenuView:UserControl
+	public partial class RibbonView:UserControl
 	{
-		public EditorContextMenuView()
+		public RibbonView()
 		{
 			InitializeComponent();
 		}

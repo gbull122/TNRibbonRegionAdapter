@@ -1,18 +1,22 @@
-﻿using Prism.Mvvm;
-using System.Windows.Input;
-using System.Windows.Media;
+﻿using System;
+using System.Windows;
+using Prism.Commands;
+using Prism.Mvvm;
 
 namespace TestApplication.Module1
 {
-	public class RibbonViewModel:BindableBase
-	{
-		public RibbonViewModel(Module1HelloCommand cmd)
-		{
-			HelloCommand = cmd;
-		    ContextualBackground = new SolidColorBrush(Colors.Orange);
-		}
-		public ICommand HelloCommand { get; set; }
+    public class RibbonViewModel : BindableBase
+    {
+        public DelegateCommand Module1Command { get; private set; }
 
-	    public Brush ContextualBackground { get; set; }
-	}
+        public RibbonViewModel()
+        {
+            Module1Command = new DelegateCommand(DoSomething);
+        }
+
+        private void DoSomething()
+        {
+            MessageBox.Show("Module1");
+        }
+    }
 }

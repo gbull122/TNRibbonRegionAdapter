@@ -1,21 +1,23 @@
-﻿using Prism.Mvvm;
-using System.Windows.Input;
+﻿using Prism.Commands;
+using Prism.Mvvm;
+using Prism.Regions;
+using System.Windows;
+using TestApplication.Module1;
 
 namespace TestApplication
 {
 	public class MainWindowViewModel:BindableBase
 	{
-		public MainWindowViewModel(ShellHelloCommand cmd, 
-			LoadModule1RibbonCommand loadModule1RibbonCommand,
-			UnloadModule1RibbonCommand unloadModule1RibbonCommand)
-		{
-			HelloCommand = cmd;
-			LoadModule1RibbonCommand = loadModule1RibbonCommand;
-			UnloadModule1RibbonCommand = unloadModule1RibbonCommand;
-		}
+        public DelegateCommand Button1Command { get; private set; }
 
-		public ICommand HelloCommand { get; set; }
-		public ICommand LoadModule1RibbonCommand { get; set; }
-		public ICommand UnloadModule1RibbonCommand { get; set; }
-	}
+        public MainWindowViewModel(IRegionManager regManager)
+		{
+            Button1Command = new DelegateCommand(DoSomething);
+        }
+
+        private void DoSomething()
+        {
+            MessageBox.Show("Main");
+        }
+    }
 }

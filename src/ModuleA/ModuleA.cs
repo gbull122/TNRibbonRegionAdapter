@@ -6,10 +6,11 @@ namespace ModuleA
 {
     public class ModuleA : IModule
     {
+        IRegionManager regionManager;
 
         public ModuleA(IRegionManager regManager)
         {
-            regManager.RegisterViewWithRegion("RibbonRegion", typeof(RibbonView));
+            regionManager = regManager;
         }
 
         public void OnInitialized(IContainerProvider containerProvider)
@@ -19,7 +20,7 @@ namespace ModuleA
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-         
+            regionManager.RegisterViewWithRegion("MainMenu", typeof(RibbonView));
         }
     }
 }

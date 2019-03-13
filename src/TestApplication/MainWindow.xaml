@@ -22,92 +22,33 @@
 			x:Name="MainMenu" 
             x:FieldModifier="protected internal"
 			prism:RegionManager.RegionName ="MainMenu">
-            
+
             <RibbonTab 
                 Header="General"
 				adapter:UIElementExtension.MergeKey="GeneralTab"
-				adapter:UIElementExtension.MergeOrder="10">
-				<RibbonGroup 
+				adapter:UIElementExtension.MergeOrder="1">
+                <RibbonGroup 
                     Header="Group 1">
-					<RibbonButton 
-                        Label="Group1.Button1 (Main)" 
-                        Command="{Binding HelloCommand}" 
+                    <RibbonButton 
+                        Label="Button1 (Main)" 
+                        Command="{Binding Button1Command}" 
                         CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
-				</RibbonGroup>
-				<RibbonGroup 
+                </RibbonGroup>
+                <RibbonGroup 
                     Header="Group 2"
 					 adapter:UIElementExtension.MergeKey="GeneralTabGroup2">
-					<RibbonButton 
-                        Label="Group2.Button1 (Main)" 
-                        Command="{Binding HelloCommand}" 
+                    <RibbonButton 
+                        Label="Button1 (Main)" 
+                        Command="{Binding Button1Command}" 
                         CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
-					<RibbonButton 
-                        Label="Group2.Button2 (Main)" 
-                        Command="{Binding HelloCommand}" 
-                        CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
-				</RibbonGroup>
-			</RibbonTab>
+                    
+                </RibbonGroup>
+            </RibbonTab>
             <RibbonTab 
                 Header="Last Tab"
 				adapter:UIElementExtension.MergeKey="LastTab"
 				adapter:UIElementExtension.MergeOrder="999">
             </RibbonTab>
-		</Ribbon>
-		<StackPanel 
-            Grid.Row="1" 
-            Orientation="Horizontal">
-			<StackPanel.Resources>
-				<Style 
-                    TargetType="{x:Type Button}">
-					<Setter 
-                        Property="Margin" 
-                        Value="2,4" />
-					<Setter 
-                        Property="Padding" 
-                        Value="5,2" />
-				</Style>
-			</StackPanel.Resources>
-			<Button 
-                Content="Add Module-Ribbon" 
-                Command="{Binding LoadModule1RibbonCommand}" />
-			<Button 
-                Content="Remove Module-Ribbon" 
-                Command="{Binding UnloadModule1RibbonCommand}" />
-		</StackPanel>
-		<TextBox 
-            Grid.Row="2" 
-            AcceptsReturn="True" 
-            HorizontalAlignment="Stretch" 
-            VerticalAlignment="Stretch">
-			<TextBox.ContextMenu>
-				<ContextMenu 
-                    x:Name="CtxMenu" 
-                    prism:RegionManager.RegionName="EditorContextMenu">
-					<MenuItem 
-                        Header="B1 (Main)" 
-                        Command="{Binding HelloCommand}" 
-                        CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
-					<MenuItem 
-                        Header="B2 (Main)" 
-                        Command="{Binding HelloCommand}" 
-                        CommandParameter="{Binding RelativeSource={RelativeSource Self}}">
-						<MenuItem 
-                            Header="B2.1 (Main)" 
-                            Command="{Binding HelloCommand}" 
-                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
-						<MenuItem 
-                            Header="B2.2 (Main)" 
-                            Command="{Binding HelloCommand}" 
-                            CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
-					</MenuItem>
-					<Separator />
-					<MenuItem 
-                        Header="B3 (Main)" 
-                        Command="{Binding HelloCommand}" 
-                        CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
-				</ContextMenu>
-			</TextBox.ContextMenu>
-			<TextBox.Text>Right-Click me for a merged context-menu with preserved DataContext</TextBox.Text>
-		</TextBox>
-	</Grid>
+        </Ribbon>
+    </Grid>
 </Window>

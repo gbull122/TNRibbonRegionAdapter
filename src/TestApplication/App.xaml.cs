@@ -1,5 +1,6 @@
 ﻿using CommonServiceLocator;
 using Prism.Ioc;
+using Prism.Modularity;
 using Prism.Regions;
 using Prism.Unity;
 using System.Windows;
@@ -21,7 +22,8 @@ namespace TestApplication
 
         protected override void ConfigureRegionAdapterMappings(RegionAdapterMappings regionAdapterMappings)
         {
-            regionAdapterMappings.RegisterMapping(typeof(Ribbon), new RibbonRegionAdapter(ServiceLocator.Current.GetInstance<IRegionBehaviorFactory>()));
+            regionAdapterMappings.RegisterMapping(typeof(Ribbon), 
+                new RibbonRegionAdapter(ServiceLocator.Current.GetInstance<IRegionBehaviorFactory>()));
 
             base.ConfigureRegionAdapterMappings(regionAdapterMappings);
         }
@@ -29,6 +31,15 @@ namespace TestApplication
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
 
+        }
+        protected override IModuleCatalog CreateModuleCatalog()
+        {
+            return new ConfigurationModuleCatalog();
+        }
+
+        protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
+        {
+            moduleCatalog.AddModule<Module1.Module1>();
         }
     }
 }

@@ -79,20 +79,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="LoadModule1RibbonCommand.cs" />
     <Compile Include="MainWindowViewModel.cs" />
-    <Compile Include="Module1\EditorContextMenuView.xaml.cs">
-      <DependentUpon>EditorContextMenuView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Module1\EditorContextMenuViewModel.cs" />
     <Compile Include="Module1\Module1.cs" />
-    <Compile Include="Module1\Module1HelloCommand.cs" />
-    <Compile Include="Module1\Ribbon.xaml.cs">
-      <DependentUpon>Ribbon.xaml</DependentUpon>
+    <Compile Include="Module1\RibbonView.xaml.cs">
+      <DependentUpon>RibbonView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Module1\RibbonViewModel.cs" />
-    <Compile Include="ShellHelloCommand.cs" />
-    <Compile Include="UnloadModule1RibbonCommand.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -105,13 +97,9 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Module1\EditorContextMenuView.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Module1\RibbonView.xaml">
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Module1\Ribbon.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -143,7 +131,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Prism.RibbonRegionAdapter\TNRibbonRegionAdapter.csproj">
+    <ProjectReference Include="..\TNRibbonRegionAdapter\TNRibbonRegionAdapter.csproj">
       <Project>{44c9b173-e458-4172-b204-c56cc9a01b20}</Project>
       <Name>TNRibbonRegionAdapter</Name>
     </ProjectReference>
