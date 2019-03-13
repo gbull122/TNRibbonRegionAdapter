@@ -1,3 +1,4 @@
 # TNRibbonRegionAdapter
 
-Taken from, https://archive.codeplex.com/?p=prismribbonregionadapter updated to latest Prism and switch to Unity.
+A region adapter to deal with the WPF Ribbon in prism applications. Based on Prism.RibbonRegionAdapter, https://archive.codeplex.com/?p=prismribbonregionadapter. Original used Autofac and prism 5.
+This version is updated to latest Prism and switched to Unity for IOC.
