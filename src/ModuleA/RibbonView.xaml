@@ -4,8 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:prism="http://prismlibrary.com/"
     xmlns:adapter="clr-namespace:TNRibbonRegionAdapter;assembly=TNRibbonRegionAdapter"
-    prism:ViewModelLocator.AutoWireViewModel="True"
-    >
+    prism:ViewModelLocator.AutoWireViewModel="True" >
+    
     <Ribbon 
         x:Name="MainMenu" 
         x:FieldModifier="protected internal">
@@ -20,11 +20,9 @@
 
         <RibbonTab 
             Header="General"
-			adapter:UIElementExtension.MergeKey="GeneralTab"
 			adapter:UIElementExtension.MergeOrder="10">
             <RibbonGroup 
-                Header="Group 1"
-                adapter:UIElementExtension.MergeKey="Group 1">
+                Header="Group 1">
                 <RibbonButton 
                     Label="ModuleA_1" 
                     Command="{Binding Command1}" 
@@ -32,8 +30,7 @@
             </RibbonGroup>
             
             <RibbonGroup 
-                Header="Group 2"
-				adapter:UIElementExtension.MergeKey="GeneralTabGroup2">
+                Header="Group 2">
 
                 <RibbonButton 
                     Label="ModuleA-2" 

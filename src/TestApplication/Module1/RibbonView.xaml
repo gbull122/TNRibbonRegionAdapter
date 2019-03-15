@@ -13,7 +13,6 @@
 
         <RibbonTab
             Header="Module1 Tab"
-            adapter:UIElementExtension.MergeKey="Module1 Tab"
             adapter:UIElementExtension.MergeOrder="5">
             <RibbonGroup
                 Header="A Group">
@@ -22,8 +21,7 @@
         </RibbonTab>
 
         <RibbonTab 
-            Header="General"
-            adapter:UIElementExtension.MergeKey="GeneralTab">
+            Header="General">
             <RibbonGroup 
                 Header="Group 1">
                 <RibbonButton 

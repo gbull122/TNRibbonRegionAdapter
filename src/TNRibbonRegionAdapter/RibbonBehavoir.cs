@@ -7,20 +7,16 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Ribbon;
+using System.Windows.Media;
 
 namespace TNRibbonRegionAdapter
 {
     public class RibbonBehavoir : RegionBehavior
     {
         public static readonly string BehaviorKey = "RibbonBehavior";
+        public const double DefaultMergeOrder = 10000d;
 
-        private Ribbon mainRibbon;
-
-        public Ribbon MainRibbon
-        {
-            get { return mainRibbon; }
-            set { mainRibbon = value; }
-        }
+        public Ribbon MainRibbon { get; set; }
 
         protected override void OnAttach()
         {
@@ -34,7 +30,7 @@ namespace TNRibbonRegionAdapter
             {
                 foreach (object newItem in e.NewItems)
                 {
-                    
+
 
                     var ribbonView = newItem as UserControl;
                     var thing = GetRibbonFromView(ribbonView);
@@ -44,18 +40,18 @@ namespace TNRibbonRegionAdapter
             }
         }
 
+        private void ActiveViews_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+
+        }
+
         public Ribbon GetRibbonFromView(UserControl thing)
         {
             var foundControl = thing.FindName("MainMenu") as Ribbon;
             return foundControl;
         }
 
-        private void ActiveViews_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-
-        }
-
-        protected virtual internal void MergeRibbon(object sourceView, Ribbon moduleRibbon, Ribbon ribbon)
+        protected void MergeRibbon(object sourceView, Ribbon moduleRibbon, Ribbon ribbon)
         {
             MergeApplicationMenu(sourceView, moduleRibbon, ribbon);
             MergeQuickAccessToolbar(sourceView, moduleRibbon, ribbon);
@@ -63,7 +59,7 @@ namespace TNRibbonRegionAdapter
             MergeItemsControl(sourceView, moduleRibbon, ribbon);
         }
 
-        protected virtual internal void MergeQuickAccessToolbar(object sourceView, Ribbon moduleRibbon, Ribbon ribbon)
+        protected void MergeQuickAccessToolbar(object sourceView, Ribbon moduleRibbon, Ribbon ribbon)
         {
             if (moduleRibbon.QuickAccessToolBar != null)
             {
@@ -73,7 +69,7 @@ namespace TNRibbonRegionAdapter
             }
         }
 
-        protected virtual internal void MergeApplicationMenu(object sourceView, Ribbon moduleRibbon, Ribbon ribbon)
+        protected void MergeApplicationMenu(object sourceView, Ribbon moduleRibbon, Ribbon ribbon)
         {
             if (moduleRibbon.ApplicationMenu != null)
             {
@@ -83,13 +79,13 @@ namespace TNRibbonRegionAdapter
             }
         }
 
-        protected virtual internal void MergeContextualTabGroups(object sourceView, Ribbon moduleRibbon, Ribbon ribbon)
+        protected void MergeContextualTabGroups(object sourceView, Ribbon moduleRibbon, Ribbon ribbon)
         {
             foreach (RibbonContextualTabGroup group in moduleRibbon.ContextualTabGroups)
             {
-                if (!ribbon.ContextualTabGroups.Any(t => ItemsMatch(t, group)))
+                if (!ribbon.ContextualTabGroups.Any(t => UiElementsHaveSameId(t, group)))
                 {
-                    group.DisconnectFromParent();
+                    DisconnectFromParent(group);
                     if (group.DataContext == null)
                         group.DataContext = moduleRibbon.DataContext;
                     InsertItem(sourceView, group, ribbon.ContextualTabGroups);
@@ -97,7 +93,7 @@ namespace TNRibbonRegionAdapter
             }
         }
 
-        protected virtual void MergeItems(IList list, ItemsControl target)
+        protected void MergeItems(IList list, ItemsControl target)
         {
             if (list == null)
                 return;
@@ -111,14 +107,14 @@ namespace TNRibbonRegionAdapter
             }
         }
 
-        protected virtual internal void MergeNonItemsControl(UIElement item, ItemsControl target)
+        protected void MergeNonItemsControl(UIElement item, ItemsControl target)
         {
             if (item == null)
                 return;
             InsertItem(item, item, target.Items);
         }
 
-        protected virtual internal void MergeItemsControl(object sourceView, ItemsControl source, ItemsControl target)
+        protected void MergeItemsControl(object sourceView, ItemsControl source, ItemsControl target)
         {
             var items = source.Items.Cast<UIElement>().ToArray();
             foreach (UIElement item in items)
@@ -127,7 +123,7 @@ namespace TNRibbonRegionAdapter
                 {
                     var existingItem = target.Items
                         .OfType<ItemsControl>()
-                        .FirstOrDefault(t => ItemsMatch(t, item));
+                        .FirstOrDefault(t => UiElementsHaveSameId(t, item));
                     if (existingItem == null)
                         InsertItem(sourceView, item, target.Items);
                     else
@@ -140,73 +136,137 @@ namespace TNRibbonRegionAdapter
             }
         }
 
-        private readonly Dictionary<object, List<UIElement>> _mergedItemsByView = new Dictionary<object, List<UIElement>>();
-
         protected void InsertItem(object sourceView, UIElement item, IList target)
         {
-            RememberMergedItem(sourceView, item);
-            item.DisconnectFromParent();
-            UIElementExtension.InsertSorted(item, target);
+            DisconnectFromParent(item);
+            InsertSorted(item, target);
         }
 
-        private void RememberMergedItem(object sourceView, UIElement item)
+        protected internal bool UiElementsHaveSameId(UIElement item1, UIElement item2)
         {
-            if (!_mergedItemsByView.ContainsKey(sourceView))
-                _mergedItemsByView.Add(sourceView, new List<UIElement>());
-            var list = _mergedItemsByView[sourceView];
-            list.Add(item);
+            var item1Id = GetUiElementHeaderOrName(item1);
+            var item2Id = GetUiElementHeaderOrName(item2);
+
+            return item1Id.Equals(item2Id);
         }
 
-        protected virtual internal void UnmergeItems(IList list, ItemsControl target)
+        protected string GetUiElementHeaderOrName(UIElement item)
         {
-            if (list == null)
-                return;
+            var key = string.Empty;
 
-            foreach (var item in list)
-            {
-                Unmerge(item, target);
-            }
-        }
+            if (item is HeaderedItemsControl)
+                key = ((HeaderedItemsControl)item).Header as string;
+            if (string.IsNullOrEmpty(key) && item is FrameworkElement)
+                key = ((FrameworkElement)item).Name;
 
-        protected virtual void Unmerge(object view, ItemsControl target)
-        {
-            var list = GetMergedItemsByView(view);
-            if (list == null)
-                return;
-            list.ForEach(i => i.DisconnectFromParent(false));
-            _mergedItemsByView.Remove(view);
-        }
-
-        protected virtual internal List<UIElement> GetMergedItemsByView(object view)
-        {
-            if (!_mergedItemsByView.ContainsKey(view))
-                return null;
-            var list = _mergedItemsByView[view];
-            return list;
-        }
-
-        protected virtual internal bool ItemsMatch(UIElement item1, UIElement item2)
-        {
-            var tab1Id = GetMergeKey(item1);
-            var tab2Id = GetMergeKey(item2);
-
-            return tab1Id.Equals(tab2Id);
-        }
-
-        protected virtual internal string GetMergeKey(UIElement item)
-        {
-            var key = UIElementExtension.GetMergeKey(item);
-            if (string.IsNullOrEmpty(key))
-            {
-                if (item is HeaderedItemsControl)
-                    key = ((HeaderedItemsControl)item).Header as string;
-                if (string.IsNullOrEmpty(key) && item is FrameworkElement)
-                    key = ((FrameworkElement)item).Name;
-                if (string.IsNullOrEmpty(key))
-                    key = Guid.NewGuid().ToString();
-                UIElementExtension.SetMergeKey(item, key);
-            }
             return key;
         }
+
+        public void InsertSorted(UIElement item, IList collection)
+        {
+            var order = UIElementExtension.GetMergeOrder(item);
+            if (Math.Abs(order - DefaultMergeOrder) < 0.001)
+            {
+                order = DefaultMergeOrder;
+                UIElementExtension.SetMergeOrder(item, order);
+            }
+
+            int insertPosition = 0;
+            foreach (UIElement t in collection)
+            {
+                var curOrder = UIElementExtension.GetMergeOrder(t);
+                if (curOrder > order)
+                    break;
+                insertPosition++;
+            }
+            DisconnectFromParent(item);
+            collection.Insert(insertPosition, item);
+        }
+
+        public T GetChildOfType<T>(DependencyObject depObj)
+                where T : DependencyObject
+        {
+            if (depObj == null) return null;
+
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
+            {
+                var child = VisualTreeHelper.GetChild(depObj, i);
+
+                var result = (child as T) ?? GetChildOfType<T>(child);
+                if (result != null) return result;
+            }
+            return null;
+        }
+
+        public DependencyObject GetParent(UIElement child)
+        {
+            DependencyObject parent = null;
+            if (child is FrameworkElement)
+                parent = ((FrameworkElement)child).Parent;
+
+            if (parent == null)
+                parent = VisualTreeHelper.GetParent(child);
+
+            return parent;
+        }
+
+        public object GetDataContext(UIElement child, DependencyObject parent)
+        {
+            object dataContext = null;
+            if (child is FrameworkElement)
+            {
+                dataContext = ((FrameworkElement)child).DataContext;
+                if (dataContext == null && parent is FrameworkElement)
+                    dataContext = ((FrameworkElement)parent).DataContext;
+            }
+
+            return dataContext;
+        }
+
+        public void DisconnectFromParent(UIElement child)
+        {
+            var parent = GetParent(child);
+
+            var dataContext = GetDataContext(child, parent);
+
+            try
+            {
+                //var parentAsPresenter = parent as System.Windows.Controls.ContentPresenter;
+                //if (parentAsPresenter != null)
+                //{
+                //    parentAsPresenter.Content = null;
+                //    return;
+                //}
+                //var parentAsPanel = parent as System.Windows.Controls.Panel;
+                //if (parentAsPanel != null)
+                //{
+                //    parentAsPanel.Children.Remove(child);
+                //    return;
+                //}
+                //var parentAsContentControl = parent as System.Windows.Controls.ContentControl;
+                //if (parentAsContentControl != null)
+                //{
+                //    parentAsContentControl.Content = null;
+                //    return;
+                //}
+                //var parentAsDecorator = parent as System.Windows.Controls.Decorator;
+                //if (parentAsDecorator != null)
+                //{
+                //    parentAsDecorator.Child = null;
+                //    return;
+                //}
+                var parentAsItemsControl = parent as System.Windows.Controls.ItemsControl;
+                if (parentAsItemsControl != null)
+                {
+                    parentAsItemsControl.Items.Remove(child);
+                }
+            }
+            finally
+            {
+                if ( child is FrameworkElement && dataContext != null)
+                    ((FrameworkElement)child).DataContext = dataContext;
+            }
+        }
+
     }
 }
