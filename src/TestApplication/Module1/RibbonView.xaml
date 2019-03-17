@@ -1,10 +1,9 @@
 ﻿<UserControl 
     x:Class="TestApplication.Module1.RibbonView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:prism="http://prismlibrary.com/"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:adapter="clr-namespace:TNRibbonRegionAdapter;assembly=TNRibbonRegionAdapter"
-    xmlns:loc="clr-namespace:TestApplication"
     prism:ViewModelLocator.AutoWireViewModel="True">
     
     <Ribbon 
@@ -26,12 +25,10 @@
                 Header="Group 1">
                 <RibbonButton 
                     Label="Button1 (Module1)" 
-                    Command="{Binding Module1Command}" 
-                    CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
+                    Command="{Binding Module1Command}"/>
                 <RibbonButton 
                     Label="Button2 (Module1)" 
-                    Command="{Binding Module1Command}" 
-                    CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
+                    Command="{Binding Module1Command}" />
             </RibbonGroup>
         </RibbonTab>
 

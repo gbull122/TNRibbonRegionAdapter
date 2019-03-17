@@ -1,12 +1,10 @@
 ﻿<Window 
     x:Class="TestApplication.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:prism="http://prismlibrary.com/"
-    prism:ViewModelLocator.AutoWireViewModel="True"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:adapter="clr-namespace:TNRibbonRegionAdapter;assembly=TNRibbonRegionAdapter"
-	xmlns:loc="clr-namespace:TestApplication"
-    xmlns:sys="clr-namespace:System;assembly=System"
+    prism:ViewModelLocator.AutoWireViewModel="True"
     Title="MainWindow" 
     Height="350" 
     Width="800">
@@ -23,6 +21,19 @@
             x:FieldModifier="protected internal"
 			prism:RegionManager.RegionName ="MainMenu">
 
+            <Ribbon.ApplicationMenu>
+                <RibbonApplicationMenu
+                    x:Name="MainApplicationMenu">
+                    <RibbonApplicationSplitMenuItem  
+                            Header="Settings">
+                        <RibbonApplicationMenuItem  
+                                Header="App" 
+                                Command="{Binding Button1Command}"/>
+                    </RibbonApplicationSplitMenuItem>
+                    <RibbonApplicationMenuItem Header="Exit"/>
+                </RibbonApplicationMenu>
+            </Ribbon.ApplicationMenu>
+            
             <RibbonTab 
                 Header="General"
 				adapter:UIElementExtension.MergeOrder="1">
@@ -30,15 +41,13 @@
                     Header="Group 1">
                     <RibbonButton 
                         Label="Button1 (Main)" 
-                        Command="{Binding Button1Command}" 
-                        CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
+                        Command="{Binding Button1Command}"  />
                 </RibbonGroup>
                 <RibbonGroup 
                     Header="Group 2">
                     <RibbonButton 
                         Label="Button1 (Main)" 
-                        Command="{Binding Button1Command}" 
-                        CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
+                        Command="{Binding Button1Command}" />
                     
                 </RibbonGroup>
             </RibbonTab>

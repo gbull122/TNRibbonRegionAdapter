@@ -1,20 +1,23 @@
 ﻿<UserControl 
     x:Class="ModuleA.RibbonView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:prism="http://prismlibrary.com/"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:adapter="clr-namespace:TNRibbonRegionAdapter;assembly=TNRibbonRegionAdapter"
     prism:ViewModelLocator.AutoWireViewModel="True" >
-    
+
     <Ribbon 
         x:Name="MainMenu" 
         x:FieldModifier="protected internal">
         <Ribbon.ApplicationMenu>
             <RibbonApplicationMenu
                 x:Name="MainApplicationMenu">
-                <RibbonApplicationMenuItem  
-                        Header="ModuleA-Stuff"
-                        Command="{Binding Path=AppCommandA}"/>
+                <RibbonApplicationSplitMenuItem  
+                    Header="Settings">
+                    <RibbonApplicationMenuItem  
+                        Header="Module A ..."
+                        Command="{Binding Command1}" />
+                </RibbonApplicationSplitMenuItem>
             </RibbonApplicationMenu>
         </Ribbon.ApplicationMenu>
 
@@ -25,8 +28,7 @@
                 Header="Group 1">
                 <RibbonButton 
                     Label="ModuleA_1" 
-                    Command="{Binding Command1}" 
-                    CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
+                    Command="{Binding CustomPopupCommand}" />
             </RibbonGroup>
             
             <RibbonGroup 
@@ -35,8 +37,7 @@
                 <RibbonButton 
                     Label="ModuleA-2" 
                     adapter:UIElementExtension.MergeOrder="10" 
-                    Command="{Binding Command1}" 
-                    CommandParameter="{Binding RelativeSource={RelativeSource Self}}" />
+                    Command="{Binding Command1}"/>
 
             </RibbonGroup>
            

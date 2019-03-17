@@ -1,7 +1,6 @@
 ﻿using Prism.Regions;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Windows;
@@ -229,43 +228,14 @@ namespace TNRibbonRegionAdapter
 
             var dataContext = GetDataContext(child, parent);
 
-            try
+            var parentAsItemsControl = parent as System.Windows.Controls.ItemsControl;
+            if (parentAsItemsControl != null)
             {
-                //var parentAsPresenter = parent as System.Windows.Controls.ContentPresenter;
-                //if (parentAsPresenter != null)
-                //{
-                //    parentAsPresenter.Content = null;
-                //    return;
-                //}
-                //var parentAsPanel = parent as System.Windows.Controls.Panel;
-                //if (parentAsPanel != null)
-                //{
-                //    parentAsPanel.Children.Remove(child);
-                //    return;
-                //}
-                //var parentAsContentControl = parent as System.Windows.Controls.ContentControl;
-                //if (parentAsContentControl != null)
-                //{
-                //    parentAsContentControl.Content = null;
-                //    return;
-                //}
-                //var parentAsDecorator = parent as System.Windows.Controls.Decorator;
-                //if (parentAsDecorator != null)
-                //{
-                //    parentAsDecorator.Child = null;
-                //    return;
-                //}
-                var parentAsItemsControl = parent as System.Windows.Controls.ItemsControl;
-                if (parentAsItemsControl != null)
-                {
-                    parentAsItemsControl.Items.Remove(child);
-                }
+                parentAsItemsControl.Items.Remove(child);
             }
-            finally
-            {
-                if ( child is FrameworkElement && dataContext != null)
-                    ((FrameworkElement)child).DataContext = dataContext;
-            }
+
+            if (child is FrameworkElement && dataContext != null)
+                ((FrameworkElement)child).DataContext = dataContext;
         }
 
     }

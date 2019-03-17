@@ -6,7 +6,17 @@ namespace ModuleA
 {
     public class RibbonViewModel:BindableBase
     {
+        private string _title = "ModuleA";
+
+        public string Title
+        {
+            get { return _title; }
+            set { SetProperty(ref _title, value); }
+        }
+
         public DelegateCommand Command1 { get; private set; }
+
+        public DelegateCommand CustomPopupCommand { get; private set; }
 
         public RibbonViewModel()
         {
